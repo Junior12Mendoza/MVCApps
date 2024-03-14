@@ -17,7 +17,7 @@ public class GridView  extends View {
         */
     }
 
-    public void update(String msg, Object oldState, Object newState) {
+    public void update() {
         // call update method of each CellView
     }
 
