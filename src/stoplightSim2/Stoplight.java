@@ -1,4 +1,5 @@
-package stopLight;
+package stoplightSim2;
+
 
 import mvc.*;
 import java.awt.Color;
@@ -9,8 +10,6 @@ public class Stoplight extends Model {
     public Color getColor() {
         return color;
     }
-
-    public String toString() { return "stopLight.color = " + color; }
 
     public void change() {
         if (color.equals(Color.GREEN)) color = Color.YELLOW;

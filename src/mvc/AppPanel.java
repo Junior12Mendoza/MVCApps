@@ -82,7 +82,8 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
                 case "About" -> Utilities.inform(factory.about());
                 case "Help" -> Utilities.inform(factory.getHelp());
                 default -> {  // must be from Edit menu
-                    //???
+                    Command c = factory.makeEditCommand(model, cmmd, ae);
+                    c.execute();
                 }
             }
         } catch (Exception e) {

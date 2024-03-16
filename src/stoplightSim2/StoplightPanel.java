@@ -1,4 +1,4 @@
-package stopLight;
+package stoplightSim2;
 
 import java.awt.*;
 import javax.swing.*;
