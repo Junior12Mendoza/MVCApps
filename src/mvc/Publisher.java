@@ -7,6 +7,9 @@ public class Publisher {
     public void subscribe(Subscriber sub){
         subscriberlist.add(sub);
     }
+    public void unsubscribe(Subscriber sub){
+        subscriberlist.remove(sub);
+    }
     public void notifyObservers(){
         for(Subscriber s : subscriberlist){
             s.update();
