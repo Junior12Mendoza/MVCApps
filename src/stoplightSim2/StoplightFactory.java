@@ -7,7 +7,6 @@ public class StoplightFactory implements AppFactory {
     public Model makeModel() {
         return new Stoplight();
     }
-
     public View makeView(Model m) {
         return new StoplightView((Stoplight) m);
     }

@@ -15,6 +15,14 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
     public static int FRAME_HEIGHT = 300;
 
     public AppPanel(AppFactory factory) {
+        this.factory = factory;
+        this.model = factory.makeModel();
+        this.view = factory.makeView(model);
+        this.controlPanel = new JPanel();
+        this.setLayout((new GridLayout(1, 2)));
+        this.add(this.controlPanel);
+        this.add(this.view);
+
 
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
@@ -22,6 +30,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
         frame.setJMenuBar(createMenuBar());
         frame.setTitle(factory.getTitle());
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setVisible(true);
     }
 
     public void display() { frame.setVisible(true); }

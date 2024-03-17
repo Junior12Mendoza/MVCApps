@@ -23,4 +23,7 @@ public class View extends JPanel implements Subscriber{
     public void update(){
         repaint();
     }
+    public void paintComponent(Graphics gc) {
+        super.paintComponent(gc);
+    }
 }

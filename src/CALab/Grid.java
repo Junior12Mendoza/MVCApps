@@ -46,6 +46,7 @@ public abstract class Grid extends Model {
         Tricky part: cells in row/col 0 or dim - 1.
         The asker is not a neighbor of itself.
         */
+        return null;
     }
 
     public void observe() {
