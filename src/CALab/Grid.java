@@ -25,40 +25,87 @@ public abstract class Grid extends Model {
 
     protected void populate() {
         // 1. use makeCell to fill in cells
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                cells[i][j] = this.makeCell(true);
+            }
+        }
         // 2. use getNeighbors to set the neighbors field of each cell
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                cells[i][j].neighbors = this.getNeighbors(cells[i][j], 1);
+            }
+        }
     }
 
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
         if (randomly) {
-            // randomly set the status of each cell
+            for(int i = 0; i < dim; i++){
+                for(int j = 0; j < dim; j++){
+                    cells[i][j].reset(true);
+                }
+            }
         } else {
-            // set the status of each cell to 0 (dead)
+            for(int i = 0; i < dim; i++){
+                for(int j = 0; j < dim; j++){
+                    cells[i][j].alive = false;
+                }
+            }
         }
-        // notify subscribers
+        notifyObservers();
     }
 
-
+    /*
+    return the set of all cells that can be reached from the asker in radius steps.
+    If radius = 1 this is just the 8 cells touching the asker.
+    Tricky part: cells in row/col 0 or dim - 1.
+    The asker is not a neighbor of itself.
+    */
     public Set<Cell> getNeighbors(Cell asker, int radius) {
-        /*
-        return the set of all cells that can be reached from the asker in radius steps.
-        If radius = 1 this is just the 8 cells touching the asker.
-        Tricky part: cells in row/col 0 or dim - 1.
-        The asker is not a neighbor of itself.
-        */
+        Set<Cell> neighbors = new HashSet<Cell>();
+        int currRow = (asker.row - radius) % dim;
+        int startCol = (asker.col - radius) % dim;
+        int currCol = startCol;
+
+        while(currRow != (asker.row + radius + 1) % dim){
+            while(currCol != (asker.col + radius + 1) % dim){
+                if(currRow != asker.row || currCol != asker.col)
+                    neighbors.add(cells[currRow][currCol]);
+                currCol = (currCol + 1) % dim;
+            }
+            currCol = startCol;
+            currRow = (currRow + 1) % dim;
+        }
         return null;
     }
 
     public void observe() {
         // call each cell's observe method and notify subscribers
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                cells[i][j].observe();
+            }
+        }
+        notifyObservers();
     }
 
     public void interact() {
-        // ???
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                cells[i][j].interact();
+            }
+        }
+        notifyObservers();
     }
 
     public void update() {
-        // ???
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                cells[i][j].update();
+            }
+        }
+        notifyObservers();
     }
 
     public void updateLoop(int cycles) {
