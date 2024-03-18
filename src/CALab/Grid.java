@@ -4,7 +4,6 @@ import java.awt.*;
 import java.util.*;
 import java.io.*;
 
-import lifeLab.Agent;
 import mvc.*;
 
 public abstract class Grid extends Model {
@@ -66,8 +65,8 @@ public abstract class Grid extends Model {
         */
 
         Set<Cell> neighbors = new HashSet<Cell>();
-        int currRow = (asker.row - radius) % dim;
-        int startCol = (asker.col - radius) % dim;
+        int currRow = (asker.row - radius + dim) % dim;
+        int startCol = (asker.col - radius + dim) % dim;
         int currCol = startCol;
 
         while(currRow != (asker.row + radius + 1) % dim){
@@ -80,7 +79,6 @@ public abstract class Grid extends Model {
             currRow = (currRow + 1) % dim;
         }
         return neighbors;
-
     }
 
     public void observe() {

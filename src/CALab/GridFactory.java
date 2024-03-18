@@ -1,6 +1,5 @@
 package CALab;
 
-import lifeLab.Society;
 import mvc.*;
 
 public abstract class GridFactory implements AppFactory {

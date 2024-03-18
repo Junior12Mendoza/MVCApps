@@ -1,5 +1,4 @@
 package CALab;
-import lifeLab.Society;
 import mvc.*;
 public class RunCommand extends Command{
     protected String type;
