@@ -3,6 +3,8 @@ package CALab;
 import java.awt.*;
 import java.util.*;
 import java.io.*;
+
+import lifeLab.Agent;
 import mvc.*;
 
 public abstract class Grid extends Model {
@@ -24,13 +26,15 @@ public abstract class Grid extends Model {
     public Grid() { this(20); }
 
     protected void populate() {
-        // 1. use makeCell to fill in cells
-        for(int i = 0; i < dim; i++){
-            for(int j = 0; j < dim; j++){
-                cells[i][j] = this.makeCell(true);
+        for (int i=0;i<dim;i++) {
+            for (int j=0;j<dim;j++) {
+                Cell cell = makeCell(false);
+                cells[i][j] = cell;
+                cell.row = i;
+                cell.col = j;
             }
         }
-        // 2. use getNeighbors to set the neighbors field of each cell
+
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].neighbors = this.getNeighbors(cells[i][j], 1);
@@ -40,17 +44,9 @@ public abstract class Grid extends Model {
 
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
-        if (randomly) {
-            for(int i = 0; i < dim; i++){
-                for(int j = 0; j < dim; j++){
-                    cells[i][j].reset(true);
-                }
-            }
-        } else {
-            for(int i = 0; i < dim; i++){
-                for(int j = 0; j < dim; j++){
-                    cells[i][j].alive = false;
-                }
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                cells[i][j].reset(randomly);
             }
         }
         notifyObservers();
@@ -63,6 +59,30 @@ public abstract class Grid extends Model {
     The asker is not a neighbor of itself.
     */
     public Set<Cell> getNeighbors(Cell asker, int radius) {
+        /*
+        return the set of all cells that can be reached from the asker in radius steps.
+        If radius = 1 this is just the 8 cells touching the asker.
+        Tricky part: cells in row/col 0 or dim - 1.
+        The asker is not a neighbor of itself.
+        */
+        /*
+        Set<Cell> neighbors = asker.neighbors;
+        Queue<Cell> q = new LinkedList<>();
+        q.offer(asker);
+        while (!q.isEmpty()) {
+            Cell current = q.poll();
+            Set<Cell> nextNeighbors = current.neighbors;
+            Iterator<Cell> neighborsIterator = nextNeighbors.iterator();
+            while (neighborsIterator.hasNext()) {
+                Cell neighbor = neighborsIterator.next();
+                if (neighbor != asker && !neighbors.contains(neighbor)) {
+                    neighbors.add(neighbor);
+                    q.offer(neighbor);
+                }
+            }
+        }
+        return neighbors;*/
+
         Set<Cell> neighbors = new HashSet<Cell>();
         int currRow = (asker.row - radius) % dim;
         int startCol = (asker.col - radius) % dim;
@@ -78,10 +98,41 @@ public abstract class Grid extends Model {
             currRow = (currRow + 1) % dim;
         }
         return null;
+
+        /*
+        Set<Cell> neighbors = new HashSet<>();
+        Set<Cell> nextNeighbors = asker.neighbors;
+        Set<Cell> temp = new HashSet<>();
+        int i = 0;
+        while (i < radius) {
+            Iterator<Cell> nextIterator = nextNeighbors.iterator();
+            temp = new HashSet<>();
+            while (nextIterator.hasNext()) {
+                Cell neighbor = nextIterator.next();
+                addNeighbors(neighbor, neighbors, temp);
+            }
+            nextNeighbors = temp;
+            i++;
+        }
+        return neighbors;
+        */
     }
+    /*
+    private void addNeighbors(Cell asker, Set<Cell> neighbors, Set<Cell> temp) {
+        Set<Cell> askerNeighbors = asker.neighbors;
+        Iterator<Cell> cellsIterator = askerNeighbors.iterator();
+        while (cellsIterator.hasNext()) {
+            Cell cur = cellsIterator.next();
+            if (!neighbors.contains(cur)) {
+                neighbors.add(cur);
+                temp.add(cur);
+            }
+        }
+    }*/
 
     public void observe() {
         // call each cell's observe method and notify subscribers
+        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].observe();
@@ -91,6 +142,7 @@ public abstract class Grid extends Model {
     }
 
     public void interact() {
+        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].interact();
@@ -100,12 +152,13 @@ public abstract class Grid extends Model {
     }
 
     public void update() {
+        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].update();
             }
         }
-        notifyObservers();
+        notifyObservers(); // Ending Junior's part
     }
 
     public void updateLoop(int cycles) {

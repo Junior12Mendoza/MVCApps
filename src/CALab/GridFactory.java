@@ -1,40 +1,33 @@
 package CALab;
 
+import lifeLab.Society;
 import mvc.*;
 
-public class GridFactory implements AppFactory{
-    public Model makeModel() { // Todo: Grid is abstract what do we put here?
-        return new Model();
-    }
+public abstract class GridFactory implements AppFactory {
+    public abstract Model makeModel();
+
     public View makeView(Model m) {
-        return new GridView((Grid) m);
+        return new GridView(m);
     }
 
     public String[] getEditCommands() {
-        return new String[]{"Run", "Populate", "Clear"};
+        return new String[]{"Run1","Run50","Populate","Clear"};
     }
 
-    public Command makeEditCommand(Model model, String type, Object source) {
-        if (type == "Run1")
-            return new RunCommand(model);
-        if (type == "Run50") // Todo: Handle the case where we need to run 50 times
-            return new RunCommand(model);
-        if (type == "Populate")
-            return new PopulateCommand(model);
-        if (type == "Clear")
-            return new ClearCommand(model);
-        return null;
-    }
 
     public String getTitle() {
-        return "Cellular Automata Simulator";
+        return "Life Lab Simulator";
     }
 
     public String[] getHelp() {
-        return new String[]{"Click Run1 to run 1 time", "Click Run50 to run 50 times", "Click Populate to randomize the state of all cells in the grid", "Click Clear to clear the grid"};
+        return new String[]{"click Run1 to run 1 cycle",
+                "click Run50 to go the next 50 cycles",
+                "click Populate to repopulate the grid",
+                "click Clear to reset the grid"
+        };
     }
 
     public String about() {
-        return "CA version 1.0. Copyright 2024 by us";
+        return "Life Lab version 1.0. Copyright 2020 by Cyberdellic Designs";
     }
 }

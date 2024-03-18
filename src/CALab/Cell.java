@@ -1,11 +1,12 @@
 package CALab;
 
+import java.awt.*;
 import java.util.*;
 import java.io.*;
 import mvc.*;
 
-abstract class Cell extends Publisher implements Serializable {
-
+public abstract class Cell extends Publisher implements Serializable {
+    // Position of the cell in grid
     protected int row = 0, col = 0;
     protected Set<Cell> neighbors = new HashSet<Cell>();
     protected Grid myGrid = null;
@@ -32,7 +33,6 @@ abstract class Cell extends Publisher implements Serializable {
                 }
             }
         }
-
     }
 
     public void unpartner() {
@@ -55,4 +55,7 @@ abstract class Cell extends Publisher implements Serializable {
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
 
+    public abstract Color getColor();
+
+    public abstract int getStatus();
 }
