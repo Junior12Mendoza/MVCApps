@@ -1,11 +1,12 @@
 package CALab;
 
+import java.awt.*;
 import java.util.*;
 import java.io.*;
 import mvc.*;
 
-abstract class Cell extends Publisher implements Serializable {
-
+public abstract class Cell extends Publisher implements Serializable {
+    // Position of the cell in grid
     protected int row = 0, col = 0;
     protected Set<Cell> neighbors = new HashSet<Cell>();
     protected Grid myGrid = null;
@@ -14,15 +15,33 @@ abstract class Cell extends Publisher implements Serializable {
 
     // choose a random neighbor as a partner
     public void choosePartner() {
-        if (partner == null && neighbors != null) {
+        /*if (partner == null && neighbors != null) {
 			/*
 			Set partner to null
 			Convert neighbors set to a local array
 			Starting at a random position in the array search for a neighbor without a partner
 			Make the first such neighbor (if any) the partner and set its partner field to this
-			*/
-        }
 
+        }
+        */
+        if (partner == null && neighbors != null) {
+            int startingPosition = Utilities.rng.nextInt(neighbors.size() - 1);
+            Cell[] neighborArray = new Cell[neighbors.size()];
+            int i = 0;
+
+            for(Cell c : neighbors){
+                neighborArray[i] = c;
+                i++;
+            }
+            for(i = 0; i < neighborArray.length; i++){
+                Cell neighborCell = neighborArray[(i + startingPosition) % neighborArray.length];
+                if(neighborCell.partner == null){
+                    neighborCell.partner = this;
+                    partner = neighborCell;
+                    break;
+                }
+            }
+        }
     }
 
     public void unpartner() {
@@ -45,4 +64,7 @@ abstract class Cell extends Publisher implements Serializable {
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
 
+    public abstract Color getColor();
+
+    public abstract int getStatus();
 }
