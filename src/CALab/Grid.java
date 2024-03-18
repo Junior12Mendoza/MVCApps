@@ -17,7 +17,6 @@ public abstract class Grid extends Model {
     public Cell getCell(int row, int col) { return cells[row][col]; }
     public abstract Cell makeCell(boolean uniform);
 
-
     public Grid(int dim) {
         this.dim = dim;
         cells = new Cell[dim][dim];
@@ -65,23 +64,6 @@ public abstract class Grid extends Model {
         Tricky part: cells in row/col 0 or dim - 1.
         The asker is not a neighbor of itself.
         */
-        /*
-        Set<Cell> neighbors = asker.neighbors;
-        Queue<Cell> q = new LinkedList<>();
-        q.offer(asker);
-        while (!q.isEmpty()) {
-            Cell current = q.poll();
-            Set<Cell> nextNeighbors = current.neighbors;
-            Iterator<Cell> neighborsIterator = nextNeighbors.iterator();
-            while (neighborsIterator.hasNext()) {
-                Cell neighbor = neighborsIterator.next();
-                if (neighbor != asker && !neighbors.contains(neighbor)) {
-                    neighbors.add(neighbor);
-                    q.offer(neighbor);
-                }
-            }
-        }
-        return neighbors;*/
 
         Set<Cell> neighbors = new HashSet<Cell>();
         int currRow = (asker.row - radius) % dim;
@@ -97,38 +79,9 @@ public abstract class Grid extends Model {
             currCol = startCol;
             currRow = (currRow + 1) % dim;
         }
-        return null;
-
-        /*
-        Set<Cell> neighbors = new HashSet<>();
-        Set<Cell> nextNeighbors = asker.neighbors;
-        Set<Cell> temp = new HashSet<>();
-        int i = 0;
-        while (i < radius) {
-            Iterator<Cell> nextIterator = nextNeighbors.iterator();
-            temp = new HashSet<>();
-            while (nextIterator.hasNext()) {
-                Cell neighbor = nextIterator.next();
-                addNeighbors(neighbor, neighbors, temp);
-            }
-            nextNeighbors = temp;
-            i++;
-        }
         return neighbors;
-        */
+
     }
-    /*
-    private void addNeighbors(Cell asker, Set<Cell> neighbors, Set<Cell> temp) {
-        Set<Cell> askerNeighbors = asker.neighbors;
-        Iterator<Cell> cellsIterator = askerNeighbors.iterator();
-        while (cellsIterator.hasNext()) {
-            Cell cur = cellsIterator.next();
-            if (!neighbors.contains(cur)) {
-                neighbors.add(cur);
-                temp.add(cur);
-            }
-        }
-    }*/
 
     public void observe() {
         // call each cell's observe method and notify subscribers
@@ -148,7 +101,7 @@ public abstract class Grid extends Model {
                 cells[i][j].interact();
             }
         }
-        notifyObservers();
+        notifyObservers(); // Ending Junior's part
     }
 
     public void update() {
