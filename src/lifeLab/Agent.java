@@ -1,6 +1,6 @@
 package lifeLab;
 
-import CALab.Cell;
+import CALab.*;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -32,10 +32,13 @@ public class Agent extends Cell {
     public void update() {
         if (ambience == 3) {
             status = 1;
+            color = Color.GREEN;
         }
         else {
             status = 0;
+            color = Color.RED;
         }
+        notifyObservers();
     }
 
     public void nextState() {
@@ -54,15 +57,7 @@ public class Agent extends Cell {
     }
 
     @Override
-    public Color getColor() {
-        if (status == 0) {
-            return Color.RED;
-        }
-        else if (status == 1) {
-            return Color.GREEN;
-        }
-        return Color.GRAY;
-    }
+    public Color getColor() { return color; }
 
     @Override
     public int getStatus() {

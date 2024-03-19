@@ -1,9 +1,7 @@
 package lifeLab;
 
-import CALab.GridFactory;
-import CALab.GridPanel;
-import mvc.AppFactory;
-import mvc.AppPanel;
+import CALab.*;
+import mvc.*;
 
 import javax.swing.*;
 
@@ -14,7 +12,7 @@ public class LifePanel extends GridPanel {
 
     public static void main(String[] args) {
         GridFactory factory = new LifeFactory();
-        GridPanel panel = new GridPanel(factory);
+        GridPanel panel = new LifePanel(factory);
         panel.display();
     }
 

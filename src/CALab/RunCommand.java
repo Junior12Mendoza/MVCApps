@@ -13,10 +13,10 @@ public class RunCommand extends Command{
     @Override
     public void execute() {
         Grid grid = (Grid) model;
-        if (this.type == "Run1") {
+        if (this.type.equals("Run1")) {
             grid.updateLoop(1);
         }
-        else if (this.type == "Run50") {
+        else if (this.type.equals("Run50")) {
             grid.updateLoop(50);
         }
     }
