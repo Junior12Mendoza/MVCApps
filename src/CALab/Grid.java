@@ -31,8 +31,8 @@ public abstract class Grid extends Model {
             for (int j=0;j<dim;j++) {
                 Cell cell = makeCell(false);
                 cells[i][j] = cell;
-                cell.row = i;
-                cell.col = j;
+                cells[i][j].row = i;
+                cells[i][j].col = j;
             }
         }
 
@@ -52,13 +52,13 @@ public abstract class Grid extends Model {
         }
         // notify subscribers
         */
-        // Starting Junior's part
 
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].reset(randomly);
             }
         }
+        System.out.println("notify subscribers");
         notifyObservers();
 
     }
@@ -73,8 +73,8 @@ public abstract class Grid extends Model {
         */
 
         Set<Cell> neighbors = new HashSet<Cell>();
-        int currRow = (asker.row - radius) % dim;
-        int startCol = (asker.col - radius) % dim;
+        int currRow = (asker.row - radius + dim) % dim;
+        int startCol = (asker.col - radius + dim) % dim;
         int currCol = startCol;
 
         while(currRow != (asker.row + radius + 1) % dim){
@@ -92,35 +92,32 @@ public abstract class Grid extends Model {
 
     public void observe() {
         // call each cell's observe method and notify subscribers
-        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].observe();
             }
         }
-        notifyObservers(); // Ending Junior's part
+        notifyObservers();
     }
 
     public void interact() {
         // ???
-        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].interact();
             }
         }
-        notifyObservers(); // Ending Junior's part
+        notifyObservers();
     }
 
     public void update() {
         // ???
-        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].update();
             }
         }
-        notifyObservers(); // Ending Junior's part
+        notifyObservers();
     }
 
     public void updateLoop(int cycles) {

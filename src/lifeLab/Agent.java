@@ -30,7 +30,7 @@ public class Agent extends Cell {
     }
 
     public void update() {
-        if (ambience == 3) {
+        if (Society.rebirth.contains(ambience)) {
             status = 1;
         }
         else {
@@ -40,6 +40,12 @@ public class Agent extends Cell {
 
     public void nextState() {
         status = (status + 1) % 2;
+        if (status == 0){
+            color = Color.RED;
+        }
+        else{
+            color = Color.GREEN;
+        }
     }
 
     public void reset(boolean randomly) {
@@ -50,7 +56,7 @@ public class Agent extends Cell {
         else {
             status = 0;
         }
-
+        notifyObservers();
     }
 
     @Override
@@ -66,6 +72,6 @@ public class Agent extends Cell {
 
     @Override
     public int getStatus() {
-        return status;
+        return ambience;
     }
 }

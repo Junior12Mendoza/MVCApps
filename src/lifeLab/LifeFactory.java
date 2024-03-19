@@ -1,9 +1,6 @@
 package lifeLab;
 
-import CALab.ClearCommand;
-import CALab.GridFactory;
-import CALab.PopulateCommand;
-import CALab.RunCommand;
+import CALab.*;
 import mvc.Command;
 import mvc.Model;
 import mvc.View;
@@ -17,18 +14,18 @@ public class LifeFactory extends GridFactory {
     }
 
     public View makeView(Model m) {
-        return new LifeView((Society) m);
+        return new GridView((Society) m);
     }
 
     // source added 3/15 to support text fields
     public Command makeEditCommand(Model model, String type, Object source) {
-        if (type == "Run1" || type == "Run50") {
+        if (type.equals("RUN1") || type.equals("RUN50")) {
             return new RunCommand(model, type);
         }
-        else if (type == "Populate") {
+        else if (type.equals("POPULATE")) {
             return new PopulateCommand(model);
         }
-        else if (type == "Clear") {
+        else if (type.equals("CLEAR")) {
             return new ClearCommand(model);
         }
 

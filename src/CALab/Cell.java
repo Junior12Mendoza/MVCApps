@@ -12,6 +12,7 @@ public abstract class Cell extends Publisher implements Serializable {
     protected Grid myGrid = null;
     protected Cell partner = null;
 
+    protected Color color = Color.GRAY;
 
     // choose a random neighbor as a partner
     public void choosePartner() {

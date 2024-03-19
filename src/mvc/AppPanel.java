@@ -16,13 +16,18 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
 
     public AppPanel(AppFactory factory) {
         this.factory = factory;
+        System.out.println(factory.getTitle());
         this.model = factory.makeModel();
+        System.out.println(model.getFileName());
         this.view = factory.makeView(model);
+        //System.out.println(view.getUI());
+        //this.view.update();
         this.controlPanel = new JPanel();
         this.setLayout((new GridLayout(1, 2)));
         this.add(this.controlPanel);
         this.add(this.view);
 
+        //System.out.println("App Panel");
 
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
@@ -46,6 +51,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
         this.model.subscribe(this);
         // view must also unsubscribe then resubscribe:
         view.setModel(this.model);
+        //System.out.println("setModel");
         model.changed();
     }
 
@@ -92,6 +98,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
                 case "Help" -> Utilities.inform(factory.getHelp());
                 default -> {  // must be from Edit menu
                     Command c = factory.makeEditCommand(model, cmmd, ae);
+                    System.out.println("Command: ");
                     c.execute();
                 }
             }

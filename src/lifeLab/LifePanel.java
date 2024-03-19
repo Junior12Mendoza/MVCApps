@@ -14,7 +14,8 @@ public class LifePanel extends GridPanel {
 
     public static void main(String[] args) {
         GridFactory factory = new LifeFactory();
-        GridPanel panel = new GridPanel(factory);
+        //GridPanel panel = new GridPanel(factory);
+        GridPanel panel = new LifePanel(factory);
         panel.display();
     }
 

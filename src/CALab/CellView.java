@@ -13,6 +13,8 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         myCell = c;
         if (c != null) { c.subscribe(this); }
         this.addActionListener(this);
+        setBorder(BorderFactory.createLineBorder(Color.black));
+        update();
     }
 
     public CellView() { this(null); }
@@ -21,6 +23,7 @@ public class CellView extends JButton implements ActionListener, Subscriber {
     public void actionPerformed(ActionEvent e) {
         myCell.nextState();
         // call update needed?
+        update();
     }
 
     // called by notifySubscribers and GridView.update
