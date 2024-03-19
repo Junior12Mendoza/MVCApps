@@ -29,7 +29,7 @@ public class CellView extends JButton implements ActionListener, Subscriber {
 
     @Override
     public void update() {
-        setForeground(myCell.getColor());
+        setBackground(myCell.getColor());
         setText("" + myCell.getStatus());
         repaint();
     }

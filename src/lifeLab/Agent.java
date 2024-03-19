@@ -32,17 +32,21 @@ public class Agent extends Cell {
     public void update() {
         if (ambience == 3) {
             status = 1;
-            color = Color.GREEN;
         }
         else {
             status = 0;
-            color = Color.RED;
         }
         notifyObservers();
     }
 
     public void nextState() {
         status = (status + 1) % 2;
+        if (status == 0){
+            color = Color.RED;
+        }
+        else{
+            color = Color.GREEN;
+        }
     }
 
     public void reset(boolean randomly) {
