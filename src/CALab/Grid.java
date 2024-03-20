@@ -28,8 +28,8 @@ public abstract class Grid extends Model {
             for (int j=0;j<dim;j++) {
                 Cell cell = makeCell(false);
                 cells[i][j] = cell;
-                cell.row = i;
-                cell.col = j;
+                cells[i][j].row = i;
+                cells[i][j].col = j;
             }
         }
 
@@ -47,6 +47,7 @@ public abstract class Grid extends Model {
                 cells[i][j].reset(randomly);
             }
         }
+        System.out.println("notify subscribers");
         notifyObservers();
     }
 
@@ -83,7 +84,6 @@ public abstract class Grid extends Model {
 
     public void observe() {
         // call each cell's observe method and notify subscribers
-        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].observe();
@@ -93,23 +93,21 @@ public abstract class Grid extends Model {
     }
 
     public void interact() {
-        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].interact();
             }
         }
-        notifyObservers(); // Ending Junior's part
+        notifyObservers();
     }
 
     public void update() {
-        // Starting Junior's part
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].update();
             }
         }
-        notifyObservers(); // Ending Junior's part
+        notifyObservers();
     }
 
     public void updateLoop(int cycles) {

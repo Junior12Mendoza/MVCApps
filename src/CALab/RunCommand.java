@@ -1,5 +1,8 @@
 package CALab;
 import mvc.*;
+
+import java.util.Objects;
+
 public class RunCommand extends Command{
     protected String type;
     public RunCommand(Model model) {

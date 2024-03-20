@@ -16,10 +16,12 @@ public class GridView extends View {
         set cell.row and cell.col here
         */
         int dim = ((Grid) model).dim;
+        System.out.println("dim" + dim);
         cellViews = new CellView[dim][dim];
         for (int i=0;i<dim;i++) {
             for (int j=0;j<dim;j++) {
                 CellView cell = new CellView(((Grid) model).getCell(i, j));
+                //System.out.println(cell);
                 cellViews[i][j] = cell;
                 this.add(cell);
             }

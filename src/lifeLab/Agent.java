@@ -30,7 +30,7 @@ public class Agent extends Cell {
     }
 
     public void update() {
-        if (ambience == 3) {
+        if (Society.rebirth.contains(ambience)) {
             status = 1;
         }
         else {
@@ -57,7 +57,7 @@ public class Agent extends Cell {
         else {
             status = 0;
         }
-
+        notifyObservers();
     }
 
     @Override
@@ -65,6 +65,6 @@ public class Agent extends Cell {
 
     @Override
     public int getStatus() {
-        return status;
+        return ambience;
     }
 }
