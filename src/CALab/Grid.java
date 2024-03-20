@@ -51,12 +51,6 @@ public abstract class Grid extends Model {
         notifyObservers();
     }
 
-    /*
-    return the set of all cells that can be reached from the asker in radius steps.
-    If radius = 1 this is just the 8 cells touching the asker.
-    Tricky part: cells in row/col 0 or dim - 1.
-    The asker is not a neighbor of itself.
-    */
     public Set<Cell> getNeighbors(Cell asker, int radius) {
         /*
         return the set of all cells that can be reached from the asker in radius steps.
@@ -86,11 +80,9 @@ public abstract class Grid extends Model {
         // call each cell's observe method and notify subscribers
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
-                //System.out.println("cell " + i + " " + j);
                 cells[i][j].observe();
             }
         }
-        //notifyObservers();
     }
 
     public void interact() {
