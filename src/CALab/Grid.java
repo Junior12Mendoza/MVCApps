@@ -38,6 +38,7 @@ public abstract class Grid extends Model {
                 cells[i][j].neighbors = this.getNeighbors(cells[i][j], 1);
             }
         }
+        notifyObservers();
     }
 
     // called when Populate button is clicked
@@ -45,10 +46,9 @@ public abstract class Grid extends Model {
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].reset(randomly);
-                //notifyObservers();
             }
         }
-        //notifyObservers()
+        notifyObservers();
     }
 
     /*
@@ -106,12 +106,9 @@ public abstract class Grid extends Model {
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].update();
-
-                notifyObservers();
             }
-            //notifyObservers();
         }
-        //notifyObservers();
+        notifyObservers();
     }
 
     public void updateLoop(int cycles) {

@@ -19,10 +19,10 @@ public abstract class GridFactory implements AppFactory {
     }
 
     public String[] getHelp() {
-        return new String[]{"click Run1 to run 1 cycle",
-                "click Run50 to go the next 50 cycles",
-                "click Populate to repopulate the grid",
-                "click Clear to reset the grid"
+        return new String[]{"Click Run1 to run 1 cycle",
+                "Click Run50 to run the next 50 cycles",
+                "Click Populate to repopulate the grid",
+                "Click Clear to reset the grid"
         };
     }
 

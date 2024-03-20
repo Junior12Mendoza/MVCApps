@@ -8,7 +8,6 @@ public class PopulateCommand extends Command{
     @Override
     public void execute() {
         Grid grid = (Grid) model;
-        System.out.println("populate command");
         grid.repopulate(true);
     }
 }
