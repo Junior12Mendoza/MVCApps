@@ -10,30 +10,22 @@ public class GridView extends View {
 
     public GridView(Model model) {
         super(model);
-        /*
-        Cell cell = new CellView(((Grid)model).getCell(row, col)
-        cellViews[row][col] = cell
-        set cell.row and cell.col here
-        */
         int dim = ((Grid) model).dim;
-        //System.out.println("dim" + dim);
         cellViews = new CellView[dim][dim];
         for (int i=0;i<dim;i++) {
             for (int j=0;j<dim;j++) {
                 CellView cell = new CellView(((Grid) model).getCell(i, j));
-                //System.out.println(cell);
                 cellViews[i][j] = cell;
+                setLayout(new GridLayout(dim, dim));
                 this.add(cell);
             }
         }
     }
 
     public void update() {
-        // call update method of each CellView
         int dim = cellViews.length;
         for (int i=0;i<dim;i++) {
             for (int j=0;j<dim;j++) {
-
                 cellViews[i][j].update();
             }
         }

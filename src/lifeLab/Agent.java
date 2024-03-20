@@ -26,20 +26,20 @@ public class Agent extends Cell {
         }
         System.out.println("ambience of " + this.row + " " + this.col + " is: " + ambience);
         ambience = temp % 9;
-        //update();
     }
 
     public void interact() {
     }
 
     public void update() {
-        if (Society.rebirth.contains(ambience)) {
+        if (status == 0 && Society.rebirth.contains(ambience)){
             status = 1;
+            changeColor();
         }
-        else {
+        else if (status == 1 && Society.death.contains(ambience)){
             status = 0;
+            changeColor();
         }
-        //changeColor();
         notifyObservers();
     }
 
@@ -47,18 +47,18 @@ public class Agent extends Cell {
         if (status == 0){
             color = Color.RED;
         }
-        else{
+        else if (status == 1){
             color = Color.GREEN;
+        }
+        else{
+            color = Color.GRAY;
         }
     }
 
     public void nextState() {
-        //if (getColor()) {
-
-        //}
         status = (status + 1) % 2;
-        //changeColor();
-        //this.observe();
+        changeColor();
+        notifyObservers();
     }
 
     public void reset(boolean randomly) {
@@ -70,6 +70,7 @@ public class Agent extends Cell {
             status = 0;
             ambience = 0;
         }
+        changeColor();
         notifyObservers();
     }
 
@@ -78,6 +79,6 @@ public class Agent extends Cell {
 
     @Override
     public int getStatus() {
-        return ambience;
+        return status;
     }
 }

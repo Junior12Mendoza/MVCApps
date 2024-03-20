@@ -1,8 +1,6 @@
 package lifeLab;
 
 import mvc.View;
-import stopLight.StopLightShape;
-import stopLight.Stoplight;
 
 import javax.swing.*;
 import java.awt.*;

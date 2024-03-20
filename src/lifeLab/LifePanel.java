@@ -15,8 +15,4 @@ public class LifePanel extends GridPanel {
         GridPanel panel = new LifePanel(factory);
         panel.display();
     }
-
-
-
-
 }
