@@ -56,10 +56,11 @@ public abstract class Grid extends Model {
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].reset(randomly);
+                //notifyObservers();
             }
         }
         System.out.println("notify subscribers");
-        notifyObservers();
+
 
     }
 
@@ -94,10 +95,11 @@ public abstract class Grid extends Model {
         // call each cell's observe method and notify subscribers
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
+                //System.out.println("cell " + i + " " + j);
                 cells[i][j].observe();
             }
         }
-        notifyObservers();
+        //notifyObservers();
     }
 
     public void interact() {
@@ -115,9 +117,12 @@ public abstract class Grid extends Model {
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].update();
+
+                notifyObservers();
             }
+            //notifyObservers();
         }
-        notifyObservers();
+        //notifyObservers();
     }
 
     public void updateLoop(int cycles) {
