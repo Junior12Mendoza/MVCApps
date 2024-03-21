@@ -8,10 +8,6 @@ public class LifeFactory extends GridFactory {
         return new Society();
     }
 
-    public View makeView(Model m) {
-        return new GridView((Society) m);
-    }
-
     // source added 3/15 to support text fields
     public Command makeEditCommand(Model model, String type, Object source) {
         if (type.equalsIgnoreCase("RUN1") || type.equalsIgnoreCase("RUN50")) {

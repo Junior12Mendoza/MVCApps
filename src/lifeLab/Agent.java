@@ -31,33 +31,18 @@ public class Agent extends Cell {
     }
 
     public void update() {
-        if (status == 0 && Society.rebirth.contains(ambience)){
+        if (status == 0 && Society.rebirth.contains(ambience)) {
             status = 1;
-            changeColor();
-        }
-        else if (status == 1 && Society.death.contains(ambience)){
+        } else if (status == 1 && Society.death.contains(ambience)) {
             status = 0;
-            changeColor();
         }
         notifyObservers();
-    }
-
-    public void changeColor() {
-        if (status == 0){
-            color = Color.RED;
-        }
-        else if (status == 1){
-            color = Color.GREEN;
-        }
-        else {
-            color = Color.BLUE;
-        }
     }
 
     public void nextState() {
         status = (status + 1) % 2;
-        changeColor();
         notifyObservers();
+        myGrid.changed();
     }
 
     public void reset(boolean randomly) {
@@ -69,17 +54,25 @@ public class Agent extends Cell {
             status = 0;
             ambience = 0;
         }
-        changeColor();
         notifyObservers();
+        myGrid.changed();
     }
 
     @Override
-    public Color getColor() { 
-      return color; 
+    public Color getColor() {
+        if (status == 0){
+            return Color.RED;
+        }
+        else if (status == 1){
+            return Color.GREEN;
+        }
+        else{
+            return Color.BLUE;
+        }
     }
 
     @Override
     public int getStatus() {
-        return ambience;
+        return status;
     }
 }

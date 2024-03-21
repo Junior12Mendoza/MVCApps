@@ -24,7 +24,7 @@ public abstract class Grid extends Model {
     protected void populate() {
         for (int i=0;i<dim;i++) {
             for (int j=0;j<dim;j++) {
-                Cell cell = makeCell(false);
+                Cell cell = makeCell(true);
                 cells[i][j] = cell;
                 cells[i][j].row = i;
                 cells[i][j].col = j;
@@ -36,7 +36,6 @@ public abstract class Grid extends Model {
                 cells[i][j].neighbors = this.getNeighbors(cells[i][j], 1);
             }
         }
-        notifyObservers();
     }
 
     // called when Populate button is clicked
@@ -47,6 +46,7 @@ public abstract class Grid extends Model {
             }
         }
         notifyObservers();
+        changed();
     }
 
     public Set<Cell> getNeighbors(Cell asker, int radius) {
