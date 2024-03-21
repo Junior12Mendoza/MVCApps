@@ -1,10 +1,6 @@
 package CALab;
 
-import java.awt.*;
 import java.util.*;
-import java.io.*;
-
-import lifeLab.Agent;
 import mvc.*;
 
 public abstract class Grid extends Model {
@@ -25,8 +21,6 @@ public abstract class Grid extends Model {
     public Grid() { this(20); }
 
     protected void populate() {
-        // 1. use makeCell to fill in cells
-        // 2. use getNeighbors to set the neighbors field of each cell
         for (int i=0;i<dim;i++) {
             for (int j=0;j<dim;j++) {
                 Cell cell = makeCell(false);
@@ -41,29 +35,18 @@ public abstract class Grid extends Model {
                 cells[i][j].neighbors = this.getNeighbors(cells[i][j], 1);
             }
         }
+        notifyObservers();
     }
 
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
-        /*if (randomly) {
-            // randomly set the status of each cell
-        } else {
-            // set the status of each cell to 0 (dead)
-        }
-        // notify subscribers
-        */
-
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].reset(randomly);
-                //notifyObservers();
             }
         }
-        System.out.println("notify subscribers");
-
-
+        notifyObservers();
     }
-
 
     public Set<Cell> getNeighbors(Cell asker, int radius) {
         /*
@@ -88,22 +71,18 @@ public abstract class Grid extends Model {
             currRow = (currRow + 1) % dim;
         }
         return neighbors;
-
     }
 
     public void observe() {
         // call each cell's observe method and notify subscribers
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
-                //System.out.println("cell " + i + " " + j);
                 cells[i][j].observe();
             }
         }
-        //notifyObservers();
     }
 
     public void interact() {
-        // ???
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].interact();
@@ -113,16 +92,12 @@ public abstract class Grid extends Model {
     }
 
     public void update() {
-        // ???
         for(int i = 0; i < dim; i++){
             for(int j = 0; j < dim; j++){
                 cells[i][j].update();
-
-                notifyObservers();
             }
-            //notifyObservers();
         }
-        //notifyObservers();
+        notifyObservers();
     }
 
     public void updateLoop(int cycles) {
@@ -131,8 +106,11 @@ public abstract class Grid extends Model {
             interact();
             update();
             observe();
+
             time++;
             System.out.println("time = " + time);
         }
+
+        notifyObservers();
     }
 }
