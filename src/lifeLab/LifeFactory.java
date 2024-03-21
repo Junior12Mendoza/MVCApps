@@ -17,10 +17,10 @@ public class LifeFactory extends GridFactory {
         if (type.equalsIgnoreCase("RUN1") || type.equalsIgnoreCase("RUN50")) {
             return new RunCommand(model, type);
         }
-        else if (type.equalsIgnoreCase("Populate")) {
+        else if (type.equalsIgnoreCase("POPULATE")) {
             return new PopulateCommand(model);
         }
-        else if (type.equalsIgnoreCase("Clear")) {
+        else if (type.equalsIgnoreCase("CLEAR")) {
             return new ClearCommand(model);
         }
         return null;
