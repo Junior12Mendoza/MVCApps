@@ -24,7 +24,6 @@ public class Agent extends Cell {
                 temp++;
             }
         }
-        System.out.println("ambience of " + this.row + " " + this.col + " is: " + ambience);
         ambience = temp % 9;
     }
 
@@ -50,8 +49,8 @@ public class Agent extends Cell {
         else if (status == 1){
             color = Color.GREEN;
         }
-        else{
-            color = Color.GRAY;
+        else {
+            color = Color.BLUE;
         }
     }
 
@@ -75,10 +74,12 @@ public class Agent extends Cell {
     }
 
     @Override
-    public Color getColor() { return color; }
+    public Color getColor() { 
+      return color; 
+    }
 
     @Override
     public int getStatus() {
-        return status;
+        return ambience;
     }
 }

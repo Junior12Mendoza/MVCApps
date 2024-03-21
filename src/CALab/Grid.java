@@ -1,9 +1,7 @@
 package CALab;
 
-import java.awt.*;
 import java.util.*;
 import java.io.*;
-
 import mvc.*;
 
 public abstract class Grid extends Model {
@@ -109,8 +107,11 @@ public abstract class Grid extends Model {
             interact();
             update();
             observe();
+
             time++;
             System.out.println("time = " + time);
         }
+
+        notifyObservers();
     }
 }
