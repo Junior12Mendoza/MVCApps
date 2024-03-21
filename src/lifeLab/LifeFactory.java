@@ -14,7 +14,7 @@ public class LifeFactory extends GridFactory {
 
     // source added 3/15 to support text fields
     public Command makeEditCommand(Model model, String type, Object source) {
-        if (type.equalsIgnoreCase("Run1") || type.equalsIgnoreCase("Run50")) {
+        if (type.equalsIgnoreCase("RUN1") || type.equalsIgnoreCase("RUN50")) {
             return new RunCommand(model, type);
         }
         else if (type.equalsIgnoreCase("Populate")) {
