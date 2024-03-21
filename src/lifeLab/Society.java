@@ -10,6 +10,9 @@ public class Society extends Grid {
     public static int percentAlive = 50;
     public static Set<Integer> rebirth = new HashSet<Integer>();
     public static Set<Integer> death = new HashSet<Integer>();
+    public Society(){
+        super();
+    }
     @Override
     public Cell makeCell(boolean uniform) {
         return new Agent(this, uniform);

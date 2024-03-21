@@ -24,7 +24,6 @@ public class Agent extends Cell {
                 temp++;
             }
         }
-        System.out.println("ambience of " + this.row + " " + this.col + " is: " + ambience);
         ambience = temp % 9;
     }
 
@@ -34,31 +33,18 @@ public class Agent extends Cell {
     public void update() {
         if (status == 0 && Society.rebirth.contains(ambience)){
             status = 1;
-            changeColor();
         }
         else if (status == 1 && Society.death.contains(ambience)){
             status = 0;
-            changeColor();
         }
         notifyObservers();
-    }
-
-    public void changeColor() {
-        if (status == 0){
-            color = Color.RED;
-        }
-        else if (status == 1){
-            color = Color.GREEN;
-        }
-        else{
-            color = Color.GRAY;
-        }
+        myGrid.changed();
     }
 
     public void nextState() {
         status = (status + 1) % 2;
-        changeColor();
         notifyObservers();
+        myGrid.changed();
     }
 
     public void reset(boolean randomly) {
@@ -70,12 +56,22 @@ public class Agent extends Cell {
             status = 0;
             ambience = 0;
         }
-        changeColor();
         notifyObservers();
+        myGrid.changed();
     }
 
     @Override
-    public Color getColor() { return color; }
+    public Color getColor() {
+        if (status == 0){
+            return Color.RED;
+        }
+        else if (status == 1){
+            return Color.GREEN;
+        }
+        else{
+            return Color.GRAY;
+        }
+    }
 
     @Override
     public int getStatus() {
