@@ -1,8 +1,5 @@
 package CALab;
-import lifeLab.Society;
 import mvc.*;
-
-import java.util.Objects;
 
 public class RunCommand extends Command{
     protected String type;
@@ -17,10 +14,10 @@ public class RunCommand extends Command{
     @Override
     public void execute() {
         Grid grid = (Grid) model;
-        if (this.type.equals("RUN1")) {
+        if (this.type.equalsIgnoreCase("Run1")) {
             grid.updateLoop(1);
         }
-        else if (this.type.equals("RUN50")) {
+        else if (this.type.equalsIgnoreCase("Run50")) {
             grid.updateLoop(50);
         }
     }

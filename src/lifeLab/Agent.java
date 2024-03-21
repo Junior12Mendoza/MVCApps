@@ -49,8 +49,8 @@ public class Agent extends Cell {
         else if (status == 1){
             color = Color.GREEN;
         }
-        else{
-            color = Color.RED;
+        else {
+            color = Color.BLUE;
         }
     }
 
@@ -74,7 +74,9 @@ public class Agent extends Cell {
     }
 
     @Override
-    public Color getColor() { return color; }
+    public Color getColor() { 
+      return color; 
+    }
 
     @Override
     public int getStatus() {

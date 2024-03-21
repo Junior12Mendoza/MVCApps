@@ -1,4 +1,4 @@
-package stopLight;
+package stoplightSim2;
 
 import mvc.*;
 
@@ -7,7 +7,6 @@ public class StoplightFactory implements AppFactory {
     public Model makeModel() {
         return new Stoplight();
     }
-
     public View makeView(Model m) {
         return new StoplightView((Stoplight) m);
     }
@@ -15,7 +14,6 @@ public class StoplightFactory implements AppFactory {
     public String[] getEditCommands() {
         return new String[]{"Change"};
     }
-
 
     // source added 3/15 to support text fields
     public Command makeEditCommand(Model model, String type, Object source) {

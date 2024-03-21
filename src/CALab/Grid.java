@@ -1,6 +1,7 @@
 package CALab;
 
 import java.util.*;
+import java.io.*;
 import mvc.*;
 
 public abstract class Grid extends Model {

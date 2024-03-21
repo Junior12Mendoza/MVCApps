@@ -1,8 +1,8 @@
 package lifeLab;
 
-import CALab.Cell;
-import CALab.Grid;
+import CALab.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
